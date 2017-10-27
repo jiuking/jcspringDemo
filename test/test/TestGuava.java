@@ -1,6 +1,8 @@
 package test;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -20,10 +22,15 @@ public class TestGuava {
         logger.info(Strings.nullToEmpty(null));
         logger.info(Strings.emptyToNull(null));
         logger.info(new TestGuava().sum(optionalA,optionalB)+"");
+        new TestGuava().sqrt(-2);
     }
     private Integer sum(Optional<Integer> optionalA,Optional<Integer> optionalB){
         Integer a = optionalA.get();
         Integer b = optionalB.get();
         return a+b;
+    }
+
+    private void sqrt(double a){
+        Preconditions.checkArgument(a > 0,"Illegal Argument pass:Negative vlaue %s",a);
     }
 }
