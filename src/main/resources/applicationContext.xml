@@ -3,5 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="myTestBean" class="com.hjc.spring.bean.MyTestBean"/>
+    <bean id="myTestBean" name="test" class="com.hjc.spring.bean.MyTestBean">
+        <property name="netsted" ref="nested"/>
+    </bean>
+    <bean id="nested" class="com.hjc.spring.bean.NestedBean"/>
 </beans>

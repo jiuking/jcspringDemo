@@ -32,4 +32,12 @@ public class TwoSum {
         int[] result = new TwoSum().twoSum(targetNums,9);
         System.out.println(result[0] +" "+result[1]);
     }
+
+    @Test
+    public void testArray(){
+        String a = ",,,,3,,,";
+        String[] b = a.split(",");
+        System.out.println(b);
+        System.out.println(b.length);
+    }
 }

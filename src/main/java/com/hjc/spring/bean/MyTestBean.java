@@ -10,4 +10,8 @@ public class MyTestBean {
     @Getter
     @Setter
     private String testStr = "testStr";
+
+    @Setter
+    @Getter
+    private NestedBean netsted;
 }
