@@ -14,4 +14,5 @@ public class MyTestBean {
     @Setter
     @Getter
     private NestedBean netsted;
+
 }
