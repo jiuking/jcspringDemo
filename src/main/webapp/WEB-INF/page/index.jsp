@@ -12,5 +12,6 @@
 </head>
 <body>
     <a>ASdfdsasdfasdfasdfasdfasdfasdfasdfasjfdowenfa;osdfjiasodfiznxlkdcjfapoifjwaeakfn</a>
+    <a>${user.userName}</a>
 </body>
 </html>

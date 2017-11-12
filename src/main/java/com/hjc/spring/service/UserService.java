@@ -6,4 +6,5 @@ public interface UserService {
     int update(User user);
     int insert(User user);
     void test() throws Exception;
+    User get();
 }

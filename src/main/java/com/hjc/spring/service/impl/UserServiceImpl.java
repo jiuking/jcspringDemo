@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService{
     public int insert(User user) {
         return userMapper.insert(user);
     }
+
+    @Override
+    public User get() {
+        return userMapper.selectByPrimaryKey(1);
+    }
 }
