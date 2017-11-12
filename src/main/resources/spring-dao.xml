@@ -11,10 +11,20 @@
                         http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- 自动扫描 -->
     <context:component-scan base-package="com.hjc" />
-    <!-- 引入配置文件 -->
+    <!-- 引入数据库配置文件 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:conf/jdbc.properties" />
+    </bean>
+    <!--配置日志 -->
+    <bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingBean">
+        <property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+        <property name="targetMethod" value="initLogging" />
+        <property name="arguments">
+            <list>
+                <value>classpath:conf/log4j.properties</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"

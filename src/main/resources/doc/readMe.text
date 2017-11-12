@@ -1,2 +1,5 @@
 参考文献：
 http://blog.csdn.net/zhshulin/article/details/37956105#
+QA:
+项目配置web.xml中welcome-file 注释掉还是默认启动时，index.jsp中的内容，
+查看Tomcat conf目录下也存在welcome-file同项目中的配置一样存在index.jsp。注释掉，即可展示出自配置中映射关系。
