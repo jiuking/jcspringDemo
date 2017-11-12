@@ -12,10 +12,11 @@
     <!-- 自动扫描 -->
     <context:component-scan base-package="com.hjc" />
     <!-- 引入数据库配置文件 -->
-    <bean id="propertyConfigurer"
+    <context:property-placeholder location="classpath:conf/jdbc.properties" />
+    <!--<bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:conf/jdbc.properties" />
-    </bean>
+    </bean>-->
     <!--配置日志 -->
     <bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingBean">
         <property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
@@ -31,7 +32,7 @@
           init-method="init" destroy-method="close">
         <property name="driverClassName" value="${driver}" />
         <property name="url" value="${url}" />
-        <property name="username" value="${username}" />
+        <property name="username" value="${jdbcUsername}" />
         <property name="password" value="${password}" />
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="${initialSize}" />

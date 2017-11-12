@@ -1,5 +1,21 @@
 参考文献：
 http://blog.csdn.net/zhshulin/article/details/37956105#
 QA:
+part 1,
 项目配置web.xml中welcome-file 注释掉还是默认启动时，index.jsp中的内容，
 查看Tomcat conf目录下也存在welcome-file同项目中的配置一样存在index.jsp。注释掉，即可展示出自配置中映射关系。
+
+part 2,
+配置spring-dao.xml中
+<!-- 引入数据库配置文件 -->
+    <context:property-placeholder location="classpath:conf/jdbc.properties" />
+
+    或
+
+     <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:conf/jdbc.properties" />
+    </bean>
+    当配置为第一种情况下，数据库连接池为druid时，若jdbc.properties中数据库连接用户名这样定义时:username=XXX，会报错。应该是Druid框架问题，无法准确识别该username用户名。解决办法：
+    重命名username例如：jdbcUsername=XXX即可。
+TODO 遗留问题：分析原因。
