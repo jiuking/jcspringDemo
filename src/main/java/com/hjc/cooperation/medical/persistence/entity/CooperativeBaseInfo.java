@@ -1,6 +1,8 @@
 package com.hjc.cooperation.medical.persistence.entity;
 
+import com.hjc.common.util.excel.Convert;
 import com.hjc.common.util.excel.ExcelColumn;
+import com.hjc.cooperation.medical.util.ConvertUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +20,7 @@ public class CooperativeBaseInfo {
     private String name;
 
     @ExcelColumn(name = "性别",index = 3)
+    @Convert(convert = ConvertUtil.class)
     private int gender;
 
     @ExcelColumn(name = "年龄",index = 4)

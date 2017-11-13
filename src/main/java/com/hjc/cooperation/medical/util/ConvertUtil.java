@@ -11,7 +11,7 @@ public class ConvertUtil implements PropertyConvert<String>{
     @Override
     public String convert(Object obj) throws ValueFormatException {
         if (obj instanceof String){
-            obj.toString().equals("");
+            return GenderEnum.getIndex(obj.toString());
         }
 
         return null;
