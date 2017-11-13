@@ -11,21 +11,19 @@ public enum GenderEnum {
    @Getter
    @Setter
    private int index;
-
    @Getter
    @Setter
    private String value;
 
-   GenderEnum(int index,String value){
+   GenderEnum(int index, String value){
       this.index = index;
       this.value = value;
    }
    public static int getIndex(String value){
-      for (GenderEnum enum : GenderEnum.values()){
-         if (enum.getValue().equals(value)){
-            return enum.getIndex();
-         }
+      for (GenderEnum temp : GenderEnum.values()) {
+         if (temp.getValue().equals(value))
+            return temp.getIndex();
       }
-      return 1;
+      return -1;
    }
 }
