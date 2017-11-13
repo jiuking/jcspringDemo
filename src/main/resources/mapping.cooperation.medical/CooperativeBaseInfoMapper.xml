@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjc.cooperation.medical.persistence.dao.CooperativeBaseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cooperativeno" jdbcType="VARCHAR" property="cooperativeno" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="visitordate" jdbcType="VARCHAR" property="visitordate" />
+    <result column="invoiceno" jdbcType="VARCHAR" property="invoiceno" />
+    <result column="compensateamount" jdbcType="DECIMAL" property="compensateamount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    <result column="gender" jdbcType="BINARY" property="gender" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cooperativeno, name, age, address, visitordate, invoiceno, compensateamount
+  </sql>
+  <sql id="Blob_Column_List">
+    gender
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cooperative_base_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cooperative_base_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    insert into cooperative_base_info (id, cooperativeno, name,
+    age, address, visitordate,
+    invoiceno, compensateamount, gender
+    )
+    values (#{id,jdbcType=VARCHAR}, #{cooperativeno,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{visitordate,jdbcType=VARCHAR},
+    #{invoiceno,jdbcType=VARCHAR}, #{compensateamount,jdbcType=DECIMAL}, #{gender,jdbcType=BINARY}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    insert into cooperative_base_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cooperativeno != null">
+        cooperativeno,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="visitordate != null">
+        visitordate,
+      </if>
+      <if test="invoiceno != null">
+        invoiceno,
+      </if>
+      <if test="compensateamount != null">
+        compensateamount,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cooperativeno != null">
+        #{cooperativeno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="visitordate != null">
+        #{visitordate,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceno != null">
+        #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="compensateamount != null">
+        #{compensateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    <set>
+      <if test="cooperativeno != null">
+        cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="visitordate != null">
+        visitordate = #{visitordate,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceno != null">
+        invoiceno = #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="compensateamount != null">
+        compensateamount = #{compensateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    set cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    age = #{age,jdbcType=INTEGER},
+    address = #{address,jdbcType=VARCHAR},
+    visitordate = #{visitordate,jdbcType=VARCHAR},
+    invoiceno = #{invoiceno,jdbcType=VARCHAR},
+    compensateamount = #{compensateamount,jdbcType=DECIMAL},
+    gender = #{gender,jdbcType=BINARY}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    set cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    age = #{age,jdbcType=INTEGER},
+    address = #{address,jdbcType=VARCHAR},
+    visitordate = #{visitordate,jdbcType=VARCHAR},
+    invoiceno = #{invoiceno,jdbcType=VARCHAR},
+    compensateamount = #{compensateamount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cooperativeno" jdbcType="VARCHAR" property="cooperativeno" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="visitordate" jdbcType="VARCHAR" property="visitordate" />
+    <result column="invoiceno" jdbcType="VARCHAR" property="invoiceno" />
+    <result column="compensateamount" jdbcType="DECIMAL" property="compensateamount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    <result column="gender" jdbcType="BINARY" property="gender" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cooperativeno, name, age, address, visitordate, invoiceno, compensateamount
+  </sql>
+  <sql id="Blob_Column_List">
+    gender
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cooperative_base_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cooperative_base_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    insert into cooperative_base_info (id, cooperativeno, name,
+    age, address, visitordate,
+    invoiceno, compensateamount, gender
+    )
+    values (#{id,jdbcType=VARCHAR}, #{cooperativeno,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{visitordate,jdbcType=VARCHAR},
+    #{invoiceno,jdbcType=VARCHAR}, #{compensateamount,jdbcType=DECIMAL}, #{gender,jdbcType=BINARY}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    insert into cooperative_base_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cooperativeno != null">
+        cooperativeno,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="visitordate != null">
+        visitordate,
+      </if>
+      <if test="invoiceno != null">
+        invoiceno,
+      </if>
+      <if test="compensateamount != null">
+        compensateamount,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cooperativeno != null">
+        #{cooperativeno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="visitordate != null">
+        #{visitordate,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceno != null">
+        #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="compensateamount != null">
+        #{compensateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    <set>
+      <if test="cooperativeno != null">
+        cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="visitordate != null">
+        visitordate = #{visitordate,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceno != null">
+        invoiceno = #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="compensateamount != null">
+        compensateamount = #{compensateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    set cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    age = #{age,jdbcType=INTEGER},
+    address = #{address,jdbcType=VARCHAR},
+    visitordate = #{visitordate,jdbcType=VARCHAR},
+    invoiceno = #{invoiceno,jdbcType=VARCHAR},
+    compensateamount = #{compensateamount,jdbcType=DECIMAL},
+    gender = #{gender,jdbcType=BINARY}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    set cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    age = #{age,jdbcType=INTEGER},
+    address = #{address,jdbcType=VARCHAR},
+    visitordate = #{visitordate,jdbcType=VARCHAR},
+    invoiceno = #{invoiceno,jdbcType=VARCHAR},
+    compensateamount = #{compensateamount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cooperativeno" jdbcType="VARCHAR" property="cooperativeno" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="visitordate" jdbcType="VARCHAR" property="visitordate" />
+    <result column="invoiceno" jdbcType="VARCHAR" property="invoiceno" />
+    <result column="compensateamount" jdbcType="DECIMAL" property="compensateamount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    <result column="gender" jdbcType="BINARY" property="gender" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cooperativeno, name, address, visitordate, invoiceno, compensateamount
+  </sql>
+  <sql id="Blob_Column_List">
+    gender
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cooperative_base_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cooperative_base_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    insert into cooperative_base_info (id, cooperativeno, name, 
+      address, visitordate, invoiceno, 
+      compensateamount, gender)
+    values (#{id,jdbcType=VARCHAR}, #{cooperativeno,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{visitordate,jdbcType=VARCHAR}, #{invoiceno,jdbcType=VARCHAR}, 
+      #{compensateamount,jdbcType=DECIMAL}, #{gender,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    insert into cooperative_base_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cooperativeno != null">
+        cooperativeno,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="visitordate != null">
+        visitordate,
+      </if>
+      <if test="invoiceno != null">
+        invoiceno,
+      </if>
+      <if test="compensateamount != null">
+        compensateamount,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cooperativeno != null">
+        #{cooperativeno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="visitordate != null">
+        #{visitordate,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceno != null">
+        #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="compensateamount != null">
+        #{compensateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    <set>
+      <if test="cooperativeno != null">
+        cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="visitordate != null">
+        visitordate = #{visitordate,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceno != null">
+        invoiceno = #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="compensateamount != null">
+        compensateamount = #{compensateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    set cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      visitordate = #{visitordate,jdbcType=VARCHAR},
+      invoiceno = #{invoiceno,jdbcType=VARCHAR},
+      compensateamount = #{compensateamount,jdbcType=DECIMAL},
+      gender = #{gender,jdbcType=BINARY}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo">
+    update cooperative_base_info
+    set cooperativeno = #{cooperativeno,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      visitordate = #{visitordate,jdbcType=VARCHAR},
+      invoiceno = #{invoiceno,jdbcType=VARCHAR},
+      compensateamount = #{compensateamount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="batchBindCooperatvieBaseInfos" parameterType="java.util.List">
+    INSERT INTO cooperative_base_info (id, cooperativeno, name, address, visitordate, invoiceno, compensateamount, gender)
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=VARCHAR}, #{item.cooperativeno,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},
+      #{item.address,jdbcType=VARCHAR}, #{item.visitordate,jdbcType=VARCHAR}, #{item.invoiceno,jdbcType=VARCHAR},
+      #{item.compensateamount,jdbcType=DECIMAL}, #{item.gender,jdbcType=BINARY})
+    </foreach>
+  </insert>
+</mapper>
