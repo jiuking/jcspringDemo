@@ -23,7 +23,7 @@ public enum GenderEnum {
    public static int getIndex(String value){
       for (GenderEnum enum : GenderEnum.values()){
          if (enum.getValue().equals(value)){
-            return enum.getIndex();
+            return enum.getIndex()
          }
       }
       return 1;
