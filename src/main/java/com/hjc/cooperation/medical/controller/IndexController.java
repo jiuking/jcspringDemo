@@ -21,5 +21,6 @@ public class IndexController {
 
     @RequestMapping("/upload")
     public void upload(MultipartFile uploadFile) throws Exception{
+
     }
 }

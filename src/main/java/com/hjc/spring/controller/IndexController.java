@@ -14,7 +14,7 @@ public class IndexController {
     @Resource
     private UserService userService;
 
-    @RequestMapping("/*")
+    @RequestMapping("/demo")
     public String index(Model model){
         User user = userService.get();
         model.addAttribute("user",user);

@@ -1,6 +1,8 @@
 package com.hjc.cooperation.medical.service.impl;
 
 import com.hjc.common.util.UUIDUtil;
+import com.hjc.common.util.excel.ReadExcelUtil;
+import com.hjc.common.util.excel.ValueFormatException;
 import com.hjc.cooperation.medical.persistence.dao.CooperativeBaseInfoMapper;
 import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 import com.hjc.cooperation.medical.service.CooperateService;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.beans.Transient;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -43,9 +46,46 @@ public class CooperateServiceImpl implements CooperateService {
             logger.error("读取文件异常！",e);
             e.printStackTrace();
         }
-        List<CooperativeBaseInfo> cooperativeBaseInfoList = this.readExcel(workbook);
-        int result = batchBindingList(cooperativeBaseInfoList);
-        logger.info("批量导入返回结果"+result);
+//        List<CooperativeBaseInfo> cooperativeBaseInfoList = this.readExcel(workbook);
+        List<CooperativeBaseInfo> cooperativeBaseInfoList = new ArrayList<>();
+        try{
+            cooperativeBaseInfoList = this.readExcel(file.getInputStream());
+        }catch (IOException ioe){
+            logger.error("获取文件流错误",ioe);
+            ioe.printStackTrace();
+        } catch (IllegalAccessException e) {
+            logger.error("非法使用错误",e);
+            e.printStackTrace();
+        } catch (ValueFormatException e) {
+            logger.error("数据转换错误",e);
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            logger.error("实例化错误",e);
+            e.printStackTrace();
+        }
+        if (!cooperativeBaseInfoList.isEmpty()) {
+            int result = batchBindingList(cooperativeBaseInfoList);
+            logger.info("批量导入返回结果"+result);
+        }else
+            logger.info("读取Excel文件数据为空，未插入数据库");
+
+    }
+
+    public List<CooperativeBaseInfo> readExcel(InputStream inputStream) throws ValueFormatException, InstantiationException, IllegalAccessException, IOException {
+        List<CooperativeBaseInfo> lists = (List<CooperativeBaseInfo>) ReadExcelUtil.readExcelConvertObject(inputStream,CooperativeBaseInfo.class);
+        Set<String> set = new HashSet<>();
+        List<CooperativeBaseInfo> result = new ArrayList<>();
+        for (CooperativeBaseInfo cooperativeBaseInfo : lists){
+            String name = cooperativeBaseInfo.getName();
+            if(name == null || set.contains(name)){
+                continue;
+            }
+            set.add(name);
+            cooperativeBaseInfo.setId(UUIDUtil.generateUUID());
+            result.add(cooperativeBaseInfo);
+        }
+        lists = null;
+        return result;
     }
 
     public List<CooperativeBaseInfo> readExcel(Workbook workbook) {
