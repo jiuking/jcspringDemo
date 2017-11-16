@@ -19,3 +19,5 @@ part 2,
     当配置为第一种情况下，数据库连接池为druid时，若jdbc.properties中数据库连接用户名这样定义时:username=XXX，会报错。应该是Druid框架问题，无法准确识别该username用户名。解决办法：
     重命名username例如：jdbcUsername=XXX即可。
 TODO 遗留问题：分析原因。
+实现HttpClient集成Spring
+http://blog.csdn.net/qq_35712358/article/details/71426070
