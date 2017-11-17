@@ -6,8 +6,6 @@ import com.hjc.common.util.excel.ValueFormatException;
 import com.hjc.cooperation.medical.persistence.dao.CooperativeBaseInfoMapper;
 import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 import com.hjc.cooperation.medical.service.CooperateService;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -18,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.beans.Transient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;

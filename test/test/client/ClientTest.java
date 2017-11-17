@@ -2,6 +2,7 @@ package test.client;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hjc.common.util.StringUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -9,11 +10,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,15 +20,16 @@ import java.util.Map;
 public class ClientTest {
     @Test
     public void test(){
-        CloseableHttpClient client = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("http://github.com/");
-        try {
-            CloseableHttpResponse response = client.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            System.out.println(EntityUtils.toString(entity));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String uri = "http://github.com";
+        System.out.println(doGet(uri));
+    }
+
+    @Test
+    public void testHttpClientGetJson(){
+        String uri = "http://localhost:8081/hjcspring/json";
+        String result = doGet(uri);
+        JSONObject jsonObject = JSONObject.parseObject(result);
+        System.out.println(jsonObject.toJSONString());
     }
 
     @Test
@@ -46,5 +45,22 @@ public class ClientTest {
         jsonObject.put("sd","asdf");
         jsonObject.put("sa","23");
         System.out.println(jsonObject.toJSONString());
+    }
+
+    private String doGet(String uri){
+        if (StringUtil.isEmpty(uri)){
+            throw new IllegalArgumentException("输入参数非法！"+uri);
+        }
+        HttpGet httpGet = new HttpGet(uri);
+        CloseableHttpClient client = HttpClients.createDefault();
+        String result = null;
+        try {
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            result = EntityUtils.toString(entity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
