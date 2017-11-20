@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +28,7 @@ import java.util.Set;
 /**
  * Created by Administrator on 2017/11/13 0013.
  */
+@Service
 public class CooperateServiceImpl implements CooperateService {
 
     private static final Logger logger = Logger.getLogger(CooperateServiceImpl.class);
@@ -68,6 +70,11 @@ public class CooperateServiceImpl implements CooperateService {
 
     }
 
+    @Override
+    public CooperativeBaseInfo getCooperativeBaseInfo(String id) {
+        return cooperativeBaseInfoMapper.selectByPrimaryKey(id);
+    }
+
     public List<CooperativeBaseInfo> readExcel(InputStream inputStream) throws ValueFormatException, InstantiationException, IllegalAccessException, IOException {
         List<CooperativeBaseInfo> lists = (List<CooperativeBaseInfo>) ReadExcelUtil.readExcelConvertObject(inputStream,CooperativeBaseInfo.class);
         Set<String> set = new HashSet<>();
@@ -106,7 +113,7 @@ public class CooperateServiceImpl implements CooperateService {
                     cooperativeBaseInfo.setId(UUIDUtil.generateUUID());
                     switch (j) {
                         case 1:
-                            cooperativeBaseInfo.setCooperativeno(cell.getStringCellValue());
+                            cooperativeBaseInfo.setCooperativeNo(cell.getStringCellValue());
                             break;
                         case 2://根据姓名去重复数据
                             String tempName = cell.getStringCellValue();
@@ -126,13 +133,13 @@ public class CooperateServiceImpl implements CooperateService {
                             cooperativeBaseInfo.setAddress(cell.getStringCellValue());
                             break;
                         case 6:
-                            cooperativeBaseInfo.setVisitordate(cell.getStringCellValue());
+                            cooperativeBaseInfo.setVisitorDate(cell.getStringCellValue());
                             break;
                         case 7:
-                            cooperativeBaseInfo.setInvoiceno(cell.getStringCellValue());
+                            cooperativeBaseInfo.setInvoiceNo(cell.getStringCellValue());
                             break;
                         case 8:
-                            cooperativeBaseInfo.setCompensateamount(new BigDecimal(cell.getStringCellValue()));
+                            cooperativeBaseInfo.setCompensateAmount(new BigDecimal(cell.getStringCellValue()));
                             break;
                     }
                 }

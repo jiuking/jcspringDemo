@@ -1,5 +1,6 @@
 package com.hjc.cooperation.medical.service;
 
+import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -7,4 +8,5 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface CooperateService<T> {
     void transferToDB(MultipartFile file);
+    CooperativeBaseInfo getCooperativeBaseInfo(String id);
 }

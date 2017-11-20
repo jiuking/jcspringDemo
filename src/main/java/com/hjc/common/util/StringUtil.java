@@ -7,4 +7,8 @@ public final class StringUtil {
         }
         return false;
     }
+
+    public static boolean isNotEmpty(String s) {
+        return !isEmpty(s);
+    }
 }

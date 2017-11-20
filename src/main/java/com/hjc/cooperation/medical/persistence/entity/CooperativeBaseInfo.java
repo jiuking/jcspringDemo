@@ -14,7 +14,7 @@ public class CooperativeBaseInfo {
     private String id;
 
     @ExcelColumn(name = "合医证号",index = 1)
-    private String cooperativeno;
+    private String cooperativeNo;
 
     @ExcelColumn(name = "姓名",index = 2)
     private String name;
@@ -30,12 +30,12 @@ public class CooperativeBaseInfo {
     private String address;
 
     @ExcelColumn(name = "就诊时间",index = 6)
-    private String visitordate;
+    private String visitorDate;
 
     @ExcelColumn(name = "发票号码",index = 7)
-    private String invoiceno;
+    private String invoiceNo;
 
     @ExcelColumn(name = "补偿金额",index = 8)
-    private BigDecimal compensateamount;
+    private BigDecimal compensateAmount;
 
 }

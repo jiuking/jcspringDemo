@@ -49,8 +49,8 @@ public final class ReadExcelUtil {
                 String value = "";
                 if (excelColumn != null) {
                     Cell cell = row.getCell(excelColumn.index());
-                    /*value = cell.toString().trim();
-                    CellType cellType = cell.getCellTypeEnum();*/
+                    value = cell.toString().trim();
+                    /*CellType cellType = cell.getCellTypeEnum();*/
                     formatValue(obj,field,type,cell);//类型转换
                 }
                 Convert convert = field.getAnnotation(Convert.class);
@@ -95,8 +95,8 @@ public final class ReadExcelUtil {
             File file = new File("C:\\Users\\Administrator\\Documents\\Tencent Files\\1838778265\\FileRecv\\2016年电子表格太平.xls");
             List<CooperativeBaseInfo> list = (List<CooperativeBaseInfo>) ReadExcelUtil.readExcelConvertObject(new FileInputStream(file), CooperativeBaseInfo.class);
             for (CooperativeBaseInfo temp: list) {
-                System.out.println(temp.getCompensateamount());
-                System.out.println(temp.getInvoiceno());
+                System.out.println(temp.getCompensateAmount());
+                System.out.println(temp.getInvoiceNo());
                 System.out.println(temp.getAge());
             }
         }catch (Exception e){
