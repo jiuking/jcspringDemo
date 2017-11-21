@@ -2,6 +2,8 @@ package com.hjc.cooperation.medical.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
+import com.hjc.common.util.page.PageEntity;
+import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 import com.hjc.cooperation.medical.service.CooperateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +15,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/11/13 0013.
@@ -64,5 +70,16 @@ public class IndexController {
     @RequestMapping("/list")
     public String list(){
         return "cooperate/list";
+    }
+
+    @RequestMapping("listTable")
+    @ResponseBody
+    public Object listJson() {
+        Map<String, String> map = new HashMap<>();
+        PageEntity pageEntity = new PageEntity();
+        pageEntity.setPageNum(0);
+        pageEntity.setPageSize(10);
+        List<CooperativeBaseInfo> list =  cooperateService.list(map,pageEntity);
+        return JSONObject.toJSON(list);
     }
 }
