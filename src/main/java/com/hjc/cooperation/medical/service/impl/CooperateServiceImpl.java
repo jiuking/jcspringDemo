@@ -151,7 +151,7 @@ public class CooperateServiceImpl implements CooperateService {
 
     @Transactional
     public int batchBindingList(List<CooperativeBaseInfo> cooperativeBaseInfos){
-        return cooperativeBaseInfoMapper.batchBindCooperatvieBaseInfos(cooperativeBaseInfos);
+        return cooperativeBaseInfoMapper.batchBindCooperativeBaseInfos(cooperativeBaseInfos);
     }
 }
 

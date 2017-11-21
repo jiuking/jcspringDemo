@@ -1,6 +1,7 @@
 package com.hjc.cooperation.medical.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
 import com.hjc.cooperation.medical.service.CooperateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,5 +59,10 @@ public class IndexController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", "success");
         return jsonObject;
+    }
+
+    @RequestMapping("/list")
+    public String list(){
+        return "cooperate/list";
     }
 }

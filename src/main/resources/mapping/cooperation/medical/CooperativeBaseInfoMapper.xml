@@ -157,7 +157,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <insert id="batchBindCooperatvieBaseInfos" parameterType="java.util.List">
+  <insert id="batchBindCooperativeBaseInfos" parameterType="java.util.List">
     INSERT INTO cooperative_base_info (id, cooperative_no, name, address, visitor_date, age ,invoice_no, compensate_amount, gender)
     values
     <foreach collection="list" item="item" index="index" separator=",">
@@ -166,4 +166,13 @@
       #{item.compensateAmount,jdbcType=DECIMAL}, #{item.gender,jdbcType=BINARY})
     </foreach>
   </insert>
+
+  <select id="listCooperativeBaseInfo" parameterType="Map" resultMap="ResultMapWithBLOBs">
+    SELECT  <include refid="Base_Column_List" />,<include refid="Blob_Column_List" /> FROM cooperative_base_info
+    <where>
+      <if test="id != null and id != '' ">
+        id = #{id}
+      </if>
+    </where>
+  </select>
 </mapper>

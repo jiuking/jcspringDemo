@@ -121,6 +121,13 @@
       <artifactId>spring-test</artifactId>
       <version>${spring.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-commons</artifactId>
+      <version>1.11.6.RELEASE</version>
+    </dependency>
+
     <!--Spring end-->
 
     <dependency>
@@ -215,6 +222,11 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.2</version>
+    </dependency>
 
   </dependencies>
   <build>

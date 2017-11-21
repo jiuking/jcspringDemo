@@ -4,6 +4,7 @@ package com.hjc.cooperation.medical.persistence.dao;
 import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CooperativeBaseInfoMapper {
     int deleteByPrimaryKey(String id);
@@ -20,5 +21,7 @@ public interface CooperativeBaseInfoMapper {
 
     int updateByPrimaryKey(CooperativeBaseInfo record);
 
-    int batchBindCooperatvieBaseInfos(List<CooperativeBaseInfo> cooperativeBaseInfos);
+    int batchBindCooperativeBaseInfos(List<CooperativeBaseInfo> cooperativeBaseInfos);
+
+    List<CooperativeBaseInfo> listCooperativeBaseInfo(Map<String,String> map);
 }

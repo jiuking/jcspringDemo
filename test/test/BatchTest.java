@@ -4,6 +4,8 @@ import com.hjc.cooperation.medical.persistence.dao.CooperativeBaseInfoMapper;
 import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -15,6 +17,8 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:spring-dao.xml","classpath*:spring-mvc.xml"})
 public class BatchTest{
+
+    private static final Logger log = LoggerFactory.getLogger(BatchTest.class);
 
     @Autowired
     private CooperativeBaseInfoMapper cooperativeBaseInfoMapper;
@@ -42,6 +46,8 @@ public class BatchTest{
         List<CooperativeBaseInfo> list = new ArrayList<>();
         list.add(c1);
         list.add(c2);
-        cooperativeBaseInfoMapper.batchBindCooperatvieBaseInfos(list);
+        cooperativeBaseInfoMapper.batchBindCooperativeBaseInfos(list);
+        log.info("asd");
     }
+
 }
