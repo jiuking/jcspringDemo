@@ -5,6 +5,8 @@ import com.github.pagehelper.Page;
 import com.hjc.common.util.page.PageEntity;
 import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 import com.hjc.cooperation.medical.service.CooperateService;
+import org.apache.log4j.Logger;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +30,17 @@ import java.util.Map;
 @RequestMapping("/cooperate")
 public class IndexController {
 
+    private static final Logger logger = Logger.getLogger(IndexController.class);
+
     @Resource
     private CooperateService cooperateService;
 
+    @Resource
+    private RedisTemplate<String,String> redisTemplate;
+
     @RequestMapping("/index")
     public String index(){
+        logger.info(redisTemplate.boundValueOps("a").get());
         return "cooperate/upload";
     }
 

@@ -23,3 +23,13 @@ TODO 遗留问题：分析原因。
 http://blog.csdn.net/qq_35712358/article/details/71426070
 
 CAS 问题单点登录，跨系统访问问题。
+
+Junit Test 问题：
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'test.redis.RedisTest': Unsatisfied dependency expressed through field 'redisTemplate'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.data.redis.core.RedisTemplate<java.io.Serializable, java.io.Serializable>' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:588)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+
+猜测原因：
+@ContextConfiguration(locations = {"classpath:spring-*.xml"}) 改为 @ContextConfiguration(locations={"classpath:spring-dao.xml","classpath:spring-redis.xml"})即可。
+应该是locations 中spring-*.xml问题。
