@@ -1,5 +1,6 @@
 package com.hjc.cooperation.medical.service;
 
+import com.github.pagehelper.PageInfo;
 import com.hjc.common.util.page.PageEntity;
 import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,5 +16,5 @@ public interface CooperateService<T> {
 
     CooperativeBaseInfo getCooperativeBaseInfo(String id);
 
-    List<CooperativeBaseInfo> list(Map<String,String> map,PageEntity pageEntity);
+    PageInfo<CooperativeBaseInfo> list(Map<String,String> map, PageEntity pageEntity);
 }

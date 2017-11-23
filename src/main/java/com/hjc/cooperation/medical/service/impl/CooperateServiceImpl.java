@@ -1,9 +1,11 @@
 package com.hjc.cooperation.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hjc.common.util.UUIDUtil;
 import com.hjc.common.util.excel.ReadExcelUtil;
 import com.hjc.common.util.excel.ValueFormatException;
+import com.hjc.common.util.page.Page;
 import com.hjc.common.util.page.PageEntity;
 import com.hjc.cooperation.medical.persistence.dao.CooperativeBaseInfoMapper;
 import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
@@ -75,9 +77,10 @@ public class CooperateServiceImpl implements CooperateService {
     }
 
     @Override
-    public List<CooperativeBaseInfo> list(Map map, PageEntity pageEntity) {
+    public PageInfo<CooperativeBaseInfo> list(Map map, PageEntity pageEntity) {
         PageHelper.startPage(pageEntity.getPageNum(),pageEntity.getPageSize());
-        return cooperativeBaseInfoMapper.listCooperativeBaseInfo(map);
+        PageInfo<CooperativeBaseInfo> pageInfo = new PageInfo<>(cooperativeBaseInfoMapper.listCooperativeBaseInfo(map));
+        return pageInfo;
     }
 
     public List<CooperativeBaseInfo> readExcel(InputStream inputStream) throws ValueFormatException, InstantiationException, IllegalAccessException, IOException {

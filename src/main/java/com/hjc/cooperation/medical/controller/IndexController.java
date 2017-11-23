@@ -2,6 +2,8 @@ package com.hjc.cooperation.medical.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
+import com.hjc.common.util.StringUtil;
 import com.hjc.common.util.page.PageEntity;
 import com.hjc.cooperation.medical.persistence.entity.CooperativeBaseInfo;
 import com.hjc.cooperation.medical.service.CooperateService;
@@ -82,12 +84,18 @@ public class IndexController {
 
     @RequestMapping("listTable")
     @ResponseBody
-    public Object listJson() {
+    public Object listJson(String offset,String limit) {
         Map<String, String> map = new HashMap<>();
         PageEntity pageEntity = new PageEntity();
-        pageEntity.setPageNum(0);
-        pageEntity.setPageSize(10);
-        List<CooperativeBaseInfo> list =  cooperateService.list(map,pageEntity);
-        return JSONObject.toJSON(list);
+        //pageNum 为页码，而非行数
+        int pageNum = StringUtil.isEmpty(offset) ? 0 : Integer.parseInt(offset);
+        int pageSize = StringUtil.isEmpty(limit) ? 10 : Integer.parseInt(limit);
+        pageEntity.setPageNum(pageNum/pageSize + 1);
+        pageEntity.setPageSize(pageSize);
+        PageInfo<CooperativeBaseInfo> list =  cooperateService.list(map,pageEntity);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("rows", list.getList());
+        jsonObject.put("total", list.getTotal());
+        return jsonObject;
     }
 }

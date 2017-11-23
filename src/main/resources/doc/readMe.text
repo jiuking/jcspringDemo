@@ -33,3 +33,5 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 猜测原因：
 @ContextConfiguration(locations = {"classpath:spring-*.xml"}) 改为 @ContextConfiguration(locations={"classpath:spring-dao.xml","classpath:spring-redis.xml"})即可。
 应该是locations 中spring-*.xml问题。
+
+页面展示问题，bootstrap-table-edit.js 引用，尽量写成这种：<script src="...."></script>。而不是这种<script src="..."/>。导致可能引入有问题。
