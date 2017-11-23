@@ -24,4 +24,6 @@ public interface CooperativeBaseInfoMapper {
     int batchBindCooperativeBaseInfos(List<CooperativeBaseInfo> cooperativeBaseInfos);
 
     List<CooperativeBaseInfo> listCooperativeBaseInfo(Map<String,String> map);
+
+    void updateBatchAge(List<CooperativeBaseInfo> list);
 }

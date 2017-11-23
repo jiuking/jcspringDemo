@@ -175,4 +175,12 @@
       </if>
     </where>
   </select>
+
+  <update id="updateBatchAge" parameterType="java.util.List">
+    <foreach close="" collection="list" index="index" item="record" open="" separator=";">
+      update cooperative_base_info set age=#{record.age,jdbcType=INTEGER}
+      where id=#{record.id,jdbcType=VARCHAR}
+    </foreach>
+
+  </update>
 </mapper>

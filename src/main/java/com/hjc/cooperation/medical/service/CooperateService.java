@@ -17,4 +17,6 @@ public interface CooperateService<T> {
     CooperativeBaseInfo getCooperativeBaseInfo(String id);
 
     PageInfo<CooperativeBaseInfo> list(Map<String,String> map, PageEntity pageEntity);
+
+    void updateBatchAge(int addAge);
 }

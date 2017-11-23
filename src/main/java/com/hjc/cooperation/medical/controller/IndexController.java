@@ -98,4 +98,11 @@ public class IndexController {
         jsonObject.put("total", list.getTotal());
         return jsonObject;
     }
+
+    @RequestMapping("updateBatchAge")
+    @ResponseBody
+    public Object updateBatchAge(){
+        cooperateService.updateBatchAge(-1);
+        return new JSONObject();
+    }
 }

@@ -77,6 +77,16 @@ public class CooperateServiceImpl implements CooperateService {
     }
 
     @Override
+    @Transactional
+    public void updateBatchAge(int addAge) {
+        List<CooperativeBaseInfo> list = cooperativeBaseInfoMapper.listCooperativeBaseInfo(new HashMap<String, String>());
+        for (CooperativeBaseInfo temp : list) {
+            temp.setAge(temp.getAge() + addAge);
+        }
+        cooperativeBaseInfoMapper.updateBatchAge(list);
+    }
+
+    @Override
     public PageInfo<CooperativeBaseInfo> list(Map map, PageEntity pageEntity) {
         PageHelper.startPage(pageEntity.getPageNum(),pageEntity.getPageSize());
         PageInfo<CooperativeBaseInfo> pageInfo = new PageInfo<>(cooperativeBaseInfoMapper.listCooperativeBaseInfo(map));
