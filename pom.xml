@@ -22,6 +22,8 @@
     <poi.groupId>org.apache.poi</poi.groupId>
     <poi.version>3.17</poi.version>
     <httpClient.version>4.5.3</httpClient.version>
+    <activiti-groupId>org.activiti</activiti-groupId>
+    <activiti-version>5.16.6</activiti-version>
   </properties>
   <dependencies>
     <dependency>
@@ -245,6 +247,45 @@
       <artifactId>jedis</artifactId>
       <version>2.9.0</version>
     </dependency>
+
+    <!--activiti start -->
+    <dependency>
+      <groupId>${activiti-groupId}</groupId>
+      <artifactId>activiti-engine</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${activiti-groupId}</groupId>
+      <artifactId>activiti-spring</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${activiti-groupId}</groupId>
+      <artifactId>activiti-bpmn-model</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${activiti-groupId}</groupId>
+      <artifactId>activiti-bpmn-layout</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${activiti-groupId}</groupId>
+      <artifactId>activiti-process-validation</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-bpmn-converter</artifactId>
+      <version>5.16.6</version>
+    </dependency>
+
+    <!--activiti end -->
 
   </dependencies>
   <build>
