@@ -287,6 +287,12 @@
 
     <!--activiti end -->
 
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc14</artifactId>
+      <version>10.2.0.4.0</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>com.hjc.spring</finalName>

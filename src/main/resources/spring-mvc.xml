@@ -26,6 +26,16 @@
     <!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
     <context:component-scan base-package="com.hjc.**.controller"/>
 
+    <!--<bean id="springContextHolder" class="com.hjc.common.util.SpringContextHolder"/>-->
+
+    <!-- 启动时，初始化配置start -->
+    <!--<bean class="com.hjc.common.precondition.InitServletBean"/>-->
+    <!--<bean class="com.hjc.common.precondition.InitMethodProp" init-method="init" />-->
+    <!--<bean class="com.hjc.common.precondition.InitAnnoBean"/>-->
+    <!--<bean class="com.hjc.common.precondition.InitImplBean" />-->
+
+    <!-- end -->
+
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

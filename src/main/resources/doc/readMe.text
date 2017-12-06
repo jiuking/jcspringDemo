@@ -45,3 +45,20 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
      a.其他方法是synchronize 不可访问;
      b.其他方法没有加synchronize 可以访问;
      c.其他方法是 static synchronized 可以访问.
+
+随机Web启动而初始化某些关键数据，至redis缓存中。几种方式：已知5种方式。
+ <1>实现InitializingBean接口,同时需要在spring配置文件(xxx.xml)中配置该bean
+ <2>若采用XML来配置Bean的话，可以指定属性init-method
+ <3>通过注解@PostConstruct来修改初始化方法
+ 值得注意的是，三者可以同时存在，触发的顺序是先触发@PostConstruct修饰的方法，再触发afterPropertiesSet()，最后触发init-method
+ 其中@PostConstruct是通过注册一个BeanPostProcessor，在Bean的初始化方法之前调用，而afterPropertiesSet()和init-method都在初始化方法中调用
+ <4>当Spring将所有的Bean都初始化完成后，会留给我们一个入口，我们可以实现如下接口ApplicationListener<ContextRefreshedEvent>
+ <5>InitServlet继承HttpServlet且在web.xml配置文件中配置
+ 	<servlet>
+ 		<servlet-name>InitServlet</servlet-name>
+ 		<servlet-class>com.zhph.base.servlet.InitServlet</servlet-class>
+ 		<load-on-startup>1</load-on-startup>
+ 	</servlet>
+
+Spring多个环境切换问题profile。
+

@@ -2,6 +2,7 @@ package test.client;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.MapMaker;
 import com.hjc.common.util.StringUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -14,6 +15,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = {"classpath:spring-dao.xml"})
@@ -60,6 +62,7 @@ public class ClientTest {
             result = EntityUtils.toString(entity);
         } catch (IOException e) {
             e.printStackTrace();
+
         }
         return result;
 

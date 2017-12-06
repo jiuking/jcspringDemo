@@ -96,4 +96,16 @@ public class TestGuava {
         }
     }
 
+    @Test
+    public void testGuav() {
+        String a = " a b ";
+        System.out.println(Strings.isNullOrEmpty(a));
+        System.out.println(a.length());
+        System.out.println(a.trim());
+        try{
+
+        }catch (Exception e){
+            throw e;
+        }
+    }
 }

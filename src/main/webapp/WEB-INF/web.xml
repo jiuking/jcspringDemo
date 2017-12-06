@@ -48,6 +48,13 @@
     <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <!--配置随应用启动初始化数据 -->
+  <!--<servlet>
+    <servlet-name>InitServlet</servlet-name>
+    <servlet-class>com.hjc.common.precondition.InitWebServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>-->
   <!--<welcome-file-list>
     <welcome-file>/index.jsp</welcome-file>
   </welcome-file-list>-->
