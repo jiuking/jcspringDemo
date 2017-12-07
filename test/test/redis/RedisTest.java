@@ -25,4 +25,12 @@ public class RedisTest {
     public void test() {
         System.out.println("test:"+redisTemplate.boundValueOps("a").get());
     }
+
+    @Test
+    public void test1() {
+        Class clazz = String.class;
+        System.out.println(clazz);
+        System.out.println(clazz.getClass());
+//        clazz.cast(String.class);
+    }
 }

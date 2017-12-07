@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OracleTest {
-    // TODO: 2017/12/6 0006 优化哈，数据库迁移表数据问题。考虑用数据库连接池，且优化代码增强复用性，移植性。考虑注释加反射机制注入sql对应bean的值 
+    // TODO: 2017/12/6 0006 优化哈，数据库迁移表数据问题。考虑用数据库连接池，且优化代码增强复用性，移植性。考虑注释加反射机制注入sql对应bean的值
+    //关键点在于：PreparedStatement 设值问题。参考mybatis映射对象问题
 
     private static final String oracleDriverName = "oracle.jdbc.driver.OracleDriver";
     private static final String oracleUrl = "jdbc:oracle:thin:@192.168.7.202:1521:xjtest";
@@ -61,6 +62,7 @@ public class OracleTest {
                 result.getString("UPDATE_ID")+" ").append(
                 result.getDate("UPDATE_TIME")+" ").append(
                 result.getString("IS_LEVEL"));
+
 
                 dictEntity.setId(result.getString("id"));
                 dictEntity.setValue(result.getString("value"));

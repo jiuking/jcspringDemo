@@ -1,6 +1,10 @@
+import com.hjc.common.util.migrate.MigrateUtil;
+import org.junit.Test;
 import test.UserBean;
+import test.bean.Dict;
 
 import java.lang.reflect.Field;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,5 +39,11 @@ public class ReflectTest {
 
         }
         return bean;
+    }
+
+    @Test
+    public void test1() throws InstantiationException, IllegalAccessException {
+        System.out.println(MigrateUtil.migrate(Dict.class).getA());
+//       System.out.println(instance.getA());
     }
 }
