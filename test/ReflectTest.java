@@ -43,7 +43,13 @@ public class ReflectTest {
 
     @Test
     public void test1() throws InstantiationException, IllegalAccessException {
-        System.out.println(MigrateUtil.migrate(Dict.class).getA());
+//        System.out.println(MigrateUtil.migrate(Dict.class).getA());
 //       System.out.println(instance.getA());
+    }
+
+    @Test
+    public void test2() throws InstantiationException, IllegalAccessException {
+        Dict dict = new Dict();
+        MigrateUtil.test(Dict.class,dict);
     }
 }

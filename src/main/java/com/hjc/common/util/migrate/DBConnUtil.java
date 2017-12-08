@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.List;
 
 public final class DBConnUtil {
     private DBConnUtil(){
@@ -42,4 +43,13 @@ public final class DBConnUtil {
         return getUpdateResult(preparedStatement);
     }
 
+    public static <T> int getBatchResult(Connection con,PreparedStatement preparedStatement,List<T> list) throws SQLException {
+        con.setAutoCommit(false);
+        for (T obj : list) {
+            preparedStatement.addBatch();
+        }
+        preparedStatement.executeBatch();
+        con.commit();
+        return 1;
+    }
 }
