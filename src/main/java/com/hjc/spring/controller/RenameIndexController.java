@@ -29,6 +29,9 @@ public class RenameIndexController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name","Tom");
         jsonObject.put("age","12");
+        jsonObject.put("msg","成功");
+        jsonObject.put("status","S");
+        jsonObject.put("status1", "F");
         return jsonObject.toString();
     }
 }
