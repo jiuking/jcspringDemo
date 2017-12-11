@@ -91,7 +91,7 @@ public class ReflectDBTest {
     }
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,Dict> redisTemplate;
     @Test
     public void test2() throws SQLException {
         Connection con = null;
@@ -99,7 +99,6 @@ public class ReflectDBTest {
         PreparedStatement valuePreparedStatement = null;
         ResultSet keyResultSet = null;
         ResultSet valueResultSet = null;
-        List<Dict> list = new ArrayList<>();
         try {
             con = DBConnUtil.getConnection(getValue(oracleRes, "driver"),
                     getValue(oracleRes, "url"), getValue(oracleRes, "jdbcUsername"), getValue(oracleRes, "password"));
@@ -107,29 +106,42 @@ public class ReflectDBTest {
             String keySql = "select TYPE from SYS_DICT where instr(type,'DZ_')>0 group by type";
             keyPreparedStatement = con.prepareStatement(keySql);
             keyResultSet = keyPreparedStatement.executeQuery();
-            String concreateSql = "select * from SYS_DICT where type = ?";
+            String concreteSql = "select * from SYS_DICT where type = ?";
+            valuePreparedStatement = con.prepareStatement(concreteSql);
             List<String> keys = new ArrayList<>();
             while (keyResultSet.next()) {
                 keys.add(keyResultSet.getString("type"));
             }
             for (String key : keys) {
+                List<Dict> list = new ArrayList<>();
                 valuePreparedStatement.setString(1,key);
                 valueResultSet = valuePreparedStatement.executeQuery();
-                Dict dict = MigrateUtil.migrate(Dict.class, keyResultSet);
-                list.add(dict);
                 while (valueResultSet.next()) {
-
+                    Dict dict = MigrateUtil.migrate(Dict.class, valueResultSet);
+                    list.add(dict);
                 }
+                migrateRedis(key,list);
+                System.out.println("Redis存储key值为："+key);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             if (keyResultSet != null) {
                 keyResultSet.close();
                 keyResultSet = null;
+            }
+            if (valueResultSet != null) {
+                valueResultSet.close();
+                valueResultSet = null;
             }
             if (keyPreparedStatement != null) {
                 keyPreparedStatement.close();
                 keyPreparedStatement = null;
             }
+            if (valueResultSet != null) {
+                valueResultSet.close();
+                valueResultSet = null;
+            }
+
             if (con != null) {
                 con.close();
                 con = null;
@@ -139,5 +151,15 @@ public class ReflectDBTest {
 
     private void migrateRedis(String key ,List list){
         redisTemplate.opsForList().rightPushAll(key, list);
+    }
+
+    @Test
+    public void testGetRedis() {
+        List<Dict> list = redisTemplate.opsForList().range("DZ_INDUSTRY_102",0,-1);
+        System.out.println(list);
+        System.out.println(redisTemplate.opsForList().size("DZ_INDUSTRY_102"));
+        for (Object dict : list) {
+            System.out.println(((Dict)dict).getLabel());
+        }
     }
 }

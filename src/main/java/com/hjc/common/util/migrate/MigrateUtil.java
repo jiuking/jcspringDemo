@@ -28,6 +28,9 @@ public final class MigrateUtil {
         for(Field field : fields) {
             field.setAccessible(true);
             Row row = field.getAnnotation(Row.class);
+            if (row == null) {
+                continue;
+            }
             merge(row, obj, field,resultSet);//合并数据。需要sql语句，数据库连接
         }
         return obj;

@@ -4,9 +4,13 @@ import com.hjc.common.util.migrate.Row;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Dict {
+public class Dict implements Serializable{
+
+    private static final long serialVersionUID = 955958948179262294L;
+
     @Row(index = 1, rowName = "id")
     @Getter
     @Setter
