@@ -62,3 +62,16 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 Spring多个环境切换问题profile。
 
+
+sublime text3 搭建Python開發環境
+https://www.cnblogs.com/nx520zj/p/5787393.html 參考
+配置Anaconda
+--default-Default：
+python_interpreter 設置安裝python路徑
+--default-user：
+{
+	"python_interpreter":"C:/Users/Administrator/AppData/Local/Programs/Python/Python36-32/python.exe",
+	"suppress_word_completions":true,
+	"suppress_explicit_completions":true,
+	"complete_parameters":true,
+}

@@ -30,4 +30,36 @@ public class TestMockito {
         Assert.assertTrue(mockedList.add("one"));
         Assert.assertEquals(mockedList.size(),1);
     }
+
+    @Test
+    public void test() {
+        long exceptionStart = System.currentTimeMillis();
+        try {
+            for (int i = 1; i < 1000000; i++) {
+                System.out.println("外部异常："+i);
+                if (i % 500 == 0) {
+                    throw new ArithmeticException();
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        long exceptionEnd = System.currentTimeMillis();
+        System.out.println(exceptionEnd - exceptionStart);
+
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            System.out.println("内部异常："+i);
+            try {
+                if (i % 500 == 0) {
+                    throw new ArithmeticException();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+    }
+
 }
