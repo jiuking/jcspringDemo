@@ -75,3 +75,22 @@ python_interpreter 設置安裝python路徑
 	"suppress_explicit_completions":true,
 	"complete_parameters":true,
 }
+
+用urllib模板，写代码python运行抓取数据时，访问https类的地址，出现404的情况，原因：检测连接对象，如果是爬虫程序，也就是非人点击访问，它就会不让你继续访问，
+所以为了要让程序可以正常运行，需要隐藏自己的爬虫程序的身份。即设置：
+User-Agent。例如：
+    url = 'http://www.csdn.net/'
+    head = {}
+    #写入User Agent信息
+    head['User-Agent'] = 'Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166  Safari/535.19'
+    #创建Request对象
+    req = request.Request(url, headers=head)
+    #传入创建好的Request对象
+    response = request.urlopen(req)
+    #读取响应信息并解码
+    html = response.read().decode('utf-8')
+    #打印信息
+    print(html)
+编码问题，设置Linux；Android 4.1.1 ..... 可能导致问题---\x98等字节无法解析，报错；解决办法：
+重新设置(Windows NT 10.0; WOW64) 等。当然网上还有说是：
+看一下设置的header是否存在 'Accept-Encoding':' gzip, deflate',这一句话，如果存在，删除即可解决。
