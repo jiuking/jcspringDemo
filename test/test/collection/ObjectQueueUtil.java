@@ -66,6 +66,14 @@ public class ObjectQueueUtil<T> {
         private static final ObjectQueueUtil INSTANCE = new ObjectQueueUtil();
     }
 
+    /**
+     * @Author: Administrator
+     * @Description: 获取单例类
+     * @param:
+     * @Date: 14:38 2017/12/20 0020
+     * @return: test.collection.ObjectQueueUtil
+     * @throws:
+     */
     public static ObjectQueueUtil getInstance() {
         return UtilHolder.INSTANCE;
     }
