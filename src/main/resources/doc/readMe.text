@@ -94,3 +94,10 @@ User-Agent。例如：
 编码问题，设置Linux；Android 4.1.1 ..... 可能导致问题---\x98等字节无法解析，报错；解决办法：
 重新设置(Windows NT 10.0; WOW64) 等。当然网上还有说是：
 看一下设置的header是否存在 'Accept-Encoding':' gzip, deflate',这一句话，如果存在，删除即可解决。
+
+端口占用：
+  netstat -aon|findstr 8085
+
+   TCP    [::]:1100              [::]:0                 LISTENING       19804
+
+　然后关闭占用该端口的进程:taskkill -f -pid 19804
