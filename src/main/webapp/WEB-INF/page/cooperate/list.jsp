@@ -52,7 +52,7 @@
     $("#otherContactsTable").bootstrapTable({
         //初始化表格
         method: 'get',
-        url:"listTable",
+        url:"cooperate/listTable",
         editable:true,//开启编辑模式
         clickToSelect: true,
         cache: false,

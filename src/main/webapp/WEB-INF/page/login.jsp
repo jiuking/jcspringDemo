@@ -21,22 +21,24 @@
     </style>
 </head>
 <body>
+<form action="enter" method="post">
 <div class="input-group">
     <span class="input-group-addon" id="basic-addon1">@</span>
-    <input id="username" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">
+    <input id="username" name="username" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">
 </div>
 <br>
 <!--下面是密码输入框-->
 <div class="input-group">
     <span class="input-group-addon" id="basic-addon1">@</span>
-    <input id="password" type="text" class="form-control" placeholder="密码" aria-describedby="basic-addon1">
+    <input id="password" name="password" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1">
 </div>
 <br>
 <!--下面是登陆按钮,包括颜色控制-->
-<button type="button" style="width:280px;" id="login" class="btn btn-default">登 录</button>
+<button style="width:280px;" id="login" class="btn btn-default">登 录</button>
+</form>
 </body>
 <script type="text/javascript">
-    $("#login").click(function () {
+    $("#login1").click(function () {
         console.log($("#username").val())
         var data = {username:$("#username").val(),password:$("#password").val()};
         console.log(data)

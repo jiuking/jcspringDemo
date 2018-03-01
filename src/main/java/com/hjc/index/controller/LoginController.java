@@ -14,9 +14,7 @@ public class LoginController {
     }
 
     @RequestMapping("/enter")
-    public String enter(HttpServletRequest request) {
-        String username=request.getParameter("username");
-        String password=request.getParameter("password");
+    public String enter(String username,String password) {
         System.out.println("username is:"+username);
         System.out.println("password is:"+password);
         return "cooperate/list";
