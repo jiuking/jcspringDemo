@@ -211,3 +211,14 @@ load- on-startup 元素在web应用启动的时候指定了servlet被加载的�
 容器必须保证值小的先被加载。如果值相等，容器可以自动选择先加载谁。
 
 web.xml 的加载顺序是：context-param -> listener -> filter -> servlet。
+
+jsp页面问题${${pageContext.request.contextPath}}
+第一种：<a href='http://${pageContext.request.contextPath}/redirectTest.do' target='_blank'>Apple</a>
+第二种：<a href='${pageContext.request.contextPath}/redirectTest.do' target='_blank'>Apple</a>
+第三种：<a href='${pageContext.request.contextPath}redirectTest.do' target='_blank'>Apple</a>
+jsp页面渲染后
+第一种：<a href='http://redirectTest.do' target='_blank'>Apple</a>
+第二种：<a href='http://localhost:8080/redirectTest.do' target='_blank'>Apple</a>
+第三种：<a href='http://localhost:8080/xd/firstFraud/redirectTest.do' target='_blank'>Apple</a>
+其后面不要接"/"（<a href='${pageContext.request.contextPath}/redirectTest.do' target='_blank'>Apple</a> ）
+第一种会存在问题即它好像没有到达域名添加的效果，第二种和第三种可以根据实际情况更改合适自己的方式。
