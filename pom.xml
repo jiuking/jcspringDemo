@@ -282,11 +282,14 @@
 
     <!--activiti end -->
 
-    <dependency>
+    <!--暂时注销ojdbc.jar 因maven没有获取Oracle授权，导致导入不进去，所以导致Jenkins编译不成功，
+    解决办法，可以直接下载给jar包，然后用maven导入安装即可，可参考网上对于Oracle jdbc.jar包的引入问题
+     -->
+    <!--<dependency>
       <groupId>com.oracle</groupId>
       <artifactId>ojdbc14</artifactId>
       <version>10.2.0.4.0</version>
-    </dependency>
+    </dependency>-->
 
   </dependencies>
   <build>
