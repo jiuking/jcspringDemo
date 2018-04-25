@@ -48,6 +48,11 @@
     <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
 
   <!--配置随应用启动初始化数据 -->
   <!--<servlet>
