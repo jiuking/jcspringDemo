@@ -291,8 +291,6 @@
       <artifactId>validation-api</artifactId>
       <version>2.0.1.Final</version>
     </dependency>
-
-
     <!--activiti end -->
 
     <!--暂时注销ojdbc.jar 因maven没有获取Oracle授权，导致导入不进去，所以导致Jenkins编译不成功，
@@ -303,6 +301,22 @@
       <artifactId>ojdbc14</artifactId>
       <version>10.2.0.4.0</version>
     </dependency>-->
+
+    <!-- Spring AspectJ AOP -->
+
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>1.9.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.1</version>
+    </dependency>
+
+    <!-- AspectJ end -->
 
   </dependencies>
   <build>
