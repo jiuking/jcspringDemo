@@ -48,8 +48,9 @@ public class MyInterceptor {
         return object;
     }
 
-    @AfterThrowing(throwing = "e")
+    //需要定义pointcut 否则报错 Initialization of bean failed; nested exception is java.lang.IllegalStateException: Must set property 'expression' before attempting to match
+    /*@AfterThrowing(throwing = "e")
     public void throwException(Throwable e) {
         log.info(e.getMessage());
-    }
+    }*/
 }
