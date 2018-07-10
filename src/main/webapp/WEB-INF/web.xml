@@ -7,7 +7,7 @@
   <!--Spring和mybaits的配置文件 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring-dao.xml,classpath:spring-redis.xml</param-value>
+    <param-value>classpath:spring-dao.xml,classpath:spring-redis.xml,classpath:ActiveMQ.xml</param-value>
   </context-param>
   <!-- 编码过滤器-->
   <filter>
@@ -35,7 +35,7 @@
   <!-- Spring MVC servlet -->
   <servlet>
     <servlet-name>SpringMVC</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <servlet-class>com.hjc.spring.MyDispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:spring-mvc.xml</param-value>

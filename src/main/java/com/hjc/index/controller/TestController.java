@@ -2,6 +2,8 @@ package com.hjc.index.controller;
 
 import com.hjc.index.annotation.LogAdvice;
 import com.hjc.index.entity.ValidateEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -24,11 +26,13 @@ import java.util.Map;
 @RestController
 public class TestController {
 
+    private Logger logger = LoggerFactory.getLogger(TestController.class);
+
     @RequestMapping("/validateTest")
     public Object validatedTest(@Validated @RequestBody ValidateEntity validateEntity, BindingResult bindingResult) {
         Map<String, Object> map = new HashMap<>(16);
         map.put("msg", "成功！");
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
             for (ObjectError err : errors) {
