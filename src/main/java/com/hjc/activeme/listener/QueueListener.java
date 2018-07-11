@@ -26,6 +26,8 @@ public class QueueListener implements MessageListener {
         try {
             String processorName = msg.getString("processor");
             Map<String, Object> param = (Map<String, Object>) msg.getObject("data");
+            System.out.println(processorName);
+            System.out.println(param.size());
         } catch (JMSException e) {
 
             log.error("QueueListener on message error|", e);

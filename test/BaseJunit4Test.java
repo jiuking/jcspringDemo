@@ -8,6 +8,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @description : base基础Test
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:ActiveMQ.xml"}) //加载配置文件
+@ContextConfiguration(locations={"classpath:spring-redis.xml","classpath:spring-dao.xml","classpath:spring-mvc.xml","classpath:ActiveMQ.xml"}) //加载配置文件
 public class BaseJunit4Test {
 }

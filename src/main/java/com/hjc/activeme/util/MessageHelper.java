@@ -4,6 +4,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
+import org.springframework.stereotype.Component;
 
 import javax.jms.*;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  * @date : 2018/7/10 0010 17:39
  * @description : messageHelper
  */
+@Component
 public class MessageHelper implements InitializingBean {
 
     @Autowired

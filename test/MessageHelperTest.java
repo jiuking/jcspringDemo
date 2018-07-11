@@ -17,9 +17,25 @@ public class MessageHelperTest extends BaseJunit4Test {
     private Destination tttQueueDestination;
 
     @Test
-    public void test() {
+    public void enqueuedTest() throws InterruptedException {
         Map<String, Object> map = new HashMap<>();
         map.put("test1","Tom");
-        MessageHelper.sendMessage(tttQueueDestination,map,"processor11");
+        for (int i = 0; i < 10000000; i++) {
+            MessageHelper.sendMessage(tttQueueDestination,map,"processor11"+i);
+            Thread.sleep(1000);
+        }
+        for (int i = 0; i < 100; i++) {
+            new Thread(() -> {
+                for (int j = 0; j < 100; j++) {
+                map.put("test1", "tom");
+                MessageHelper.sendMessage(tttQueueDestination, map, "processor1");
+                }
+            }).start();
+        }
+    }
+
+    @Test
+    public void dequeuedTest() {
+//        MessageHelper
     }
 }
