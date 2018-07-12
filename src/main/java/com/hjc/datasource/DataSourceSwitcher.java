@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
+ *
+ * atomikos 查看比较哈
  * @author : Administrator
  * @date : 2018/7/12 0012 17:17
  * @description : Spring多数据源切换
