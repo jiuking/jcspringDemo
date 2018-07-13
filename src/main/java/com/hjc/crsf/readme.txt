@@ -1,0 +1,1 @@
+spring mvc 实现跨越问题。前后端分离存在该问题。CORS 或者jsonp

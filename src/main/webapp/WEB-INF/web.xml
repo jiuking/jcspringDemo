@@ -23,6 +23,41 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <filter>
+    <filter-name>corsFilter</filter-name>
+    <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+    <init-param>
+      <param-name>cors.allowed.origins</param-name>
+      <!--对所有符合条件的资源生效-->
+      <param-value>*</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.allowed.methods</param-name>
+      <!--允许GET、POST请求-->
+      <param-value>GET,POST</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.allowed.headers</param-name>
+      <!--配置所有请求header中需要添加的信息，超出该范围，会被阻止访问-->
+      <param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,token,userCode</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.support.credentials</param-name>
+      <!--不允许使用cookie-->
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.support.maxage</param-name>
+      <!--一次握手信息后，2700ms内不用再次认证-->
+      <param-value>2700</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>corsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <!--Spring监听器 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
