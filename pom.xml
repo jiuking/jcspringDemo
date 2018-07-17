@@ -21,7 +21,7 @@
     <commons.io.version>2.6</commons.io.version>
     <poi.groupId>org.apache.poi</poi.groupId>
     <poi.version>3.17</poi.version>
-    <httpClient.version>4.5.3</httpClient.version>
+    <httpClient.version>4.5.6</httpClient.version>
     <activiti-groupId>org.activiti</activiti-groupId>
     <activiti-version>5.16.6</activiti-version>
   </properties>
@@ -205,6 +205,18 @@
       <artifactId>httpclient</artifactId>
       <version>${httpClient.version}</version>
     </dependency>
+
+      <!--<dependency>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+          <version>4.4.10</version>
+      </dependency>-->
+
+      <!--<dependency>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpmime</artifactId>
+          <version>${httpClient.version}</version>
+      </dependency>-->
 
     <dependency>
       <groupId>org.codehaus.groovy</groupId>

@@ -30,8 +30,8 @@ public class HttpClientPoolUtil {
     private static final Logger logger = LoggerFactory.getLogger(HttpClientPoolUtil.class);
 
     public static PoolingHttpClientConnectionManager cm = null;
-
-    public static CloseableHttpClient httpClient = null;
+//
+//    public static CloseableHttpClient httpClient = null;
 
     /**
      * 默认content 类型
@@ -42,28 +42,39 @@ public class HttpClientPoolUtil {
      * 默认请求超时时间30s
      */
     private static final int DEFAULT_TIME_OUT = Integer.parseInt(PropertiesHandler.getPropertiesValue(Constant.PROPERTY_URL, "Http_Default_Timeout"));
-    private static final int count = Integer.parseInt(PropertiesHandler.getPropertiesValue(Constant.PROPERTY_URL, "defaultMaxPerRoute"));
+//    private static final int count = Integer.parseInt(PropertiesHandler.getPropertiesValue(Constant.PROPERTY_URL, "defaultMaxPerRoute"));
+//
+//    private static final int totalCount = Integer.parseInt(PropertiesHandler.getPropertiesValue(Constant.PROPERTY_URL, "maxTotal"));
+//
+//    private static final int Http_Default_Keep_Time = Integer.parseInt(PropertiesHandler.getPropertiesValue(Constant.PROPERTY_URL, "Http_Default_Keep_Time"));
 
-    private static final int totalCount = Integer.parseInt(PropertiesHandler.getPropertiesValue(Constant.PROPERTY_URL, "maxTotal"));
+    public static String execute(String url) {
+        System.out.println("url:"+url);
+        return url;
+    }
 
-    private static final int Http_Default_Keep_Time = Integer.parseInt(PropertiesHandler.getPropertiesValue(Constant.PROPERTY_URL, "Http_Default_Keep_Time"));
+    public static void main(String[] args) {
+        new HttpClientPoolUtil();
+        PropertiesHandler.getPropertiesValue("job_task.properties", "Http_Default_Timeout");
+    }
+
 
     /**
      * 初始化连接池
      */
-    public static synchronized void initPools() {
+/*    public static synchronized void initPools() {
         if (httpClient == null) {
             cm = new PoolingHttpClientConnectionManager();
             cm.setDefaultMaxPerRoute(count);
             cm.setMaxTotal(totalCount);
             httpClient = HttpClients.custom().setKeepAliveStrategy(defaultStrategy).setConnectionManager(cm).build();
         }
-    }
+    }*/
 
     /**
      * Http connection keepAlive 设置
      */
-    public static ConnectionKeepAliveStrategy defaultStrategy = (HttpResponse response, HttpContext context) -> {
+    /*public static ConnectionKeepAliveStrategy defaultStrategy = (HttpResponse response, HttpContext context) -> {
         HeaderElementIterator it = new BasicHeaderElementIterator(response.headerIterator(HTTP.CONN_KEEP_ALIVE));
         int keepTime = Http_Default_Keep_Time;
         while (it.hasNext()) {
@@ -88,7 +99,7 @@ public class HttpClientPoolUtil {
 
     public static PoolingHttpClientConnectionManager getHttpConnectionManager() {
         return cm;
-    }
+    }*/
 
     /**
      * 执行http post请求 默认采用Content-Type：application/json，Accept：application/json
@@ -97,7 +108,7 @@ public class HttpClientPoolUtil {
      * @param data 请求数据
      * @return
      */
-    public static String execute(String uri, String data) {
+    /*public static String execute(String uri, String data) {
         long startTime = System.currentTimeMillis();
         HttpEntity httpEntity = null;
         HttpEntityEnclosingRequestBase method = null;
@@ -134,7 +145,7 @@ public class HttpClientPoolUtil {
             }
         }
         return responseBody;
-    }
+    }*/
 
     /**
      * 创建请求
@@ -145,7 +156,7 @@ public class HttpClientPoolUtil {
      * @param timeout     超时时间
      * @return
      */
-    public static HttpRequestBase getRequest(String uri, String methodName, String contentType, int timeout) {
+    /*public static HttpRequestBase getRequest(String uri, String methodName, String contentType, int timeout) {
         if (httpClient == null) {
             initPools();
         }
@@ -172,7 +183,7 @@ public class HttpClientPoolUtil {
         method.addHeader("Accept", contentType);
         method.setConfig(requestConfig);
         return method;
-    }
+    }*/
 
     /**
      * 执行GET 请求
@@ -180,7 +191,7 @@ public class HttpClientPoolUtil {
      * @param uri
      * @return
      */
-    public static String execute(String uri) {
+    /*public static String execute(String uri) {
         long startTime = System.currentTimeMillis();
         HttpEntity httpEntity = null;
         HttpRequestBase method = null;
@@ -216,5 +227,5 @@ public class HttpClientPoolUtil {
             }
         }
         return responseBody;
-    }
+    }*/
 }

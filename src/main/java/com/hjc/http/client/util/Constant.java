@@ -6,5 +6,5 @@ package com.hjc.http.client.util;
  * @description : 常量类
  */
 public class Constant {
-    public static final String PROPERTY_URL = "job_task.properties";
+    public static final String PROPERTY_URL = "/conf/job_task.properties";
 }

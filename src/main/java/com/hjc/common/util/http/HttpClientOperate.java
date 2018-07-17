@@ -12,6 +12,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.BeansException;
@@ -26,8 +27,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @deprecated httpclient操作类
+ * @author hjc
+ * @date
+ */
 @Component("httpClientOperate")
 public class HttpClientOperate implements BeanFactoryAware {
+
+    private static final int SUCCESS_STATUS = 200;
 
     private BeanFactory beanFactory;
 
@@ -53,13 +61,14 @@ public class HttpClientOperate implements BeanFactoryAware {
     public String doGet(String url) throws IOException {
         // 创建http GET请求
         HttpGet httpGet = new HttpGet(url);
-        httpGet.setConfig(requestConfig);//设置请求参数
+        //设置请求参数
+        httpGet.setConfig(requestConfig);
         CloseableHttpResponse response = null;
         try {
             // 执行请求
             response = this.getHttpClient().execute(httpGet);
             // 判断返回状态是否为200
-            if (response.getStatusLine().getStatusCode() == 200) {
+            if (response.getStatusLine().getStatusCode() == SUCCESS_STATUS) {
                 String content = EntityUtils.toString(response.getEntity(), "UTF-8");
                 return content;
             }
@@ -165,8 +174,5 @@ public class HttpClientOperate implements BeanFactoryAware {
             }
             //httpclient.close();
         }
-    }
-    public void testComent(String as,String ae,String a) throws Exception{
-
     }
 }
