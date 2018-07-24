@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @deprecated httpclient操作类
+ *  httpclient操作类
  * @author hjc
  * @date
  */
