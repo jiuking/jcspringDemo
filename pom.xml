@@ -328,6 +328,12 @@
       <version>1.9.1</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjtools</artifactId>
+      <version>1.9.1</version>
+    </dependency>
+
     <!-- AspectJ end -->
 
     <!-- spring activeMQ -->
