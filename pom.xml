@@ -369,6 +369,23 @@
       <scope>provided</scope><!--这里配置是在打包时忽略该组件-->
     </dependency>
 
+    <!-- cglib aop start-->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>3.2.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>6.2</version>
+    </dependency>
+
+    <!-- cglib aop end -->
+
+
+
   </dependencies>
   <build>
     <finalName>com.hjc.spring</finalName>

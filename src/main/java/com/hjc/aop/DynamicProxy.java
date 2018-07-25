@@ -23,7 +23,7 @@ public class DynamicProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Object result = null;
+        Object result;
         System.out.println("切面之前执行");
         result = method.invoke(target, args);
         System.out.println("切面之后执行");

@@ -21,5 +21,11 @@ public class PeopleTalk implements ITalk {
     @Override
     public void talk(String msg) {
         System.out.println(msg + "!你好，我是" + username + ",今的年龄是" + age);
+        speak(msg);
+    }
+
+    @Override
+    public void speak(String msg) {
+        System.out.println("speak msg:"+msg);
     }
 }

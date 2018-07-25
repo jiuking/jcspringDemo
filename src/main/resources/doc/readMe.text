@@ -268,3 +268,7 @@ web.xml中 配置以下形式：spring会自动过滤登录链接，../login与.
     <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+
+
+
+ jar包中类名与项目中类名同名，路径也一致。则加载项目中的类将覆盖jar包中的类。

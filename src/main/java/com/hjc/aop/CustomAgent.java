@@ -10,6 +10,7 @@ import java.security.ProtectionDomain;
 /***
  * https://www.cnblogs.com/ctgulong/p/5011614.html 参见链接。将该打成jar包 JVM配置 -javaagent:jagent.jar即可生成对应的
  * class文件
+ * @author hjc
  */
 public class CustomAgent implements ClassFileTransformer {
 
@@ -40,6 +41,10 @@ public class CustomAgent implements ClassFileTransformer {
      */
     private void exportClazzToFile(String dirPath, String fileName, byte[] data) {
         try {
+            File dir = new File(dirPath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
             File file = new File(dirPath + fileName);
             if (!file.exists()) {
                 file.createNewFile();
