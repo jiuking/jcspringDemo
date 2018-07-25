@@ -10,6 +10,7 @@ import com.hjc.aop.object.CglibPeopleTalk;
 public class CglibTest {
     public static void main(String[] args) {
         CglibPeopleTalk peopleTalk = (CglibPeopleTalk) new CglibProxy().getInstance(new CglibPeopleTalk());
+        System.out.println("className:"+peopleTalk.getClass().getName());
         peopleTalk.talk("业务方法",peopleTalk);
 //        peopleTalk.speak("业务方法");
     }
