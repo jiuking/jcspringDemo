@@ -3,10 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans.xsd
                         http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context.xsd
+                        http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop.xsd
                         http://www.springframework.org/schema/tx
                         http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- 自动扫描 -->
@@ -130,7 +133,11 @@
         <property name="dataSource" ref="dataSourceSwitcher"/>
     </bean>
 
+    <!-- expose-proxy 需暴露切面类， -->
+    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
+    <!--<aop:config proxy-target-class="true" expose-proxy="true"/>-->
     <!-- 开启事务控制的注解支持 -->
+    <!-- spring 自带aop事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- 加载activiti引擎 -->

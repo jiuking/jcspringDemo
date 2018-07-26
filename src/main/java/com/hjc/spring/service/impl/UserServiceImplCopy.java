@@ -13,13 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImplCopy implements UserServiceCopy {
 
     @Resource
     private UserMapper userMapper;
-
-    @Autowired
-    private UserServiceCopy userServiceCopy;
 
     @Override
     public int update(User user) {
@@ -52,11 +49,6 @@ public class UserServiceImpl implements UserService{
         return userMapper.selectByPrimaryKey(1);
     }
 
-    /**
-     * 将insertRequires_New方法提取到另一个类即可。考虑因是
-     * spring 管理bean生成的代理对象在具体调用该方法，so，可以再进切面方法。事务管理成功
-     * @return
-     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public int insertRequest() {
@@ -72,7 +64,6 @@ public class UserServiceImpl implements UserService{
             System.out.println("error:算法错误");
             e.printStackTrace();
         }*/
-        new UserServiceImpl().insertRequires_New();
         int a = 1 /0;
         return 0;
     }
@@ -86,7 +77,6 @@ public class UserServiceImpl implements UserService{
         user.setUserName("函数new");
         user.setPassword("124");
         userMapper.insert(user);
-        int a = 1/0;
         return 0;
     }
 }
