@@ -72,7 +72,9 @@ public class UserServiceImpl implements UserService{
             System.out.println("error:算法错误");
             e.printStackTrace();
         }*/
-        new UserServiceImpl().insertRequires_New();
+        //同样会存在问题 userMapper无法依赖注入。且new新建的对象应该也同样会事务失效
+//        new UserServiceImpl().insertRequires_New();
+        ((UserService)AopContext.currentProxy()).insertRequires_New();
         int a = 1 /0;
         return 0;
     }
@@ -86,7 +88,6 @@ public class UserServiceImpl implements UserService{
         user.setUserName("函数new");
         user.setPassword("124");
         userMapper.insert(user);
-        int a = 1/0;
         return 0;
     }
 }
