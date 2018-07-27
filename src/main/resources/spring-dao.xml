@@ -133,12 +133,30 @@
         <property name="dataSource" ref="dataSourceSwitcher"/>
     </bean>
 
-    <!-- expose-proxy 需暴露切面类， -->
+    <!-- expose-proxy 需暴露切面类，通过aop命名空间的<aop:aspectj-autoproxy />声明自动为spring容器中那些配置@aspectJ切面的bean创建代理，织入切面。
+    当需要需要CGLIB代理和@AspectJ自动代理支持，做一些配置即可 -->
     <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
+    <!--强制使用CGLIB代理需要将proxy-target-class设置为true -->
     <!--<aop:config proxy-target-class="true" expose-proxy="true"/>-->
     <!-- 开启事务控制的注解支持 -->
-    <!-- spring 自带aop事务 -->
+    <!-- spring aop事务注解声明 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--&lt;!&ndash; 使用aspectJ 事务 方法调用方法事务还是存在问题
+     配置事务通知start&ndash;&gt;
+    <tx:advice id="advice" transaction-manager="transactionManager">
+        <tx:attributes>
+             &lt;!&ndash;设置事务方法&ndash;&gt;
+            <tx:method name="insertRequest" propagation="REQUIRED"/>
+            <tx:method name="insertRequires_New" propagation="REQUIRES_NEW"/>
+        </tx:attributes>
+    </tx:advice>
+
+     &lt;!&ndash;配置切面&ndash;&gt;
+    <aop:config>
+        <aop:pointcut expression="execution(* com.hjc.spring.service.*.*(..) )" id="pointcut"/>
+        <aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>
+    </aop:config>-->
 
     <!-- 加载activiti引擎 -->
     <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">

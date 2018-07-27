@@ -6,6 +6,7 @@ import com.hjc.spring.service.UserService;
 import com.hjc.spring.service.UserServiceCopy;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,6 +75,9 @@ public class UserServiceImpl implements UserService{
         }*/
         //同样会存在问题 userMapper无法依赖注入。且new新建的对象应该也同样会事务失效
 //        new UserServiceImpl().insertRequires_New();
+//        System.out.println("AopContext:"+AopContext.currentProxy());
+        //直接获取aop代理对象，或者通过依赖注入ApplicationContext对象 用getBean获取该代理对象，再调用该方法，即可获取正确的事务。此种方法不适合于prototype Bean，因为每次getBean返回一个新的Bean
+//        ((UserService)AopContext.currentProxy()).insertRequires_New();
         ((UserService)AopContext.currentProxy()).insertRequires_New();
         int a = 1 /0;
         return 0;
