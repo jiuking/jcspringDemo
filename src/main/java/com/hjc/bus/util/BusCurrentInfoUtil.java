@@ -1,11 +1,18 @@
 package com.hjc.bus.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,6 +20,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Administrator
@@ -41,6 +55,7 @@ public class BusCurrentInfoUtil {
         Elements elements = doc.select("img");
         for (Element el : elements) {
             Element parent = el.parent().parent();
+            System.out.println(el.attr("class"));//inm ino outm
             System.out.println(parent.text());
             resultMsg_temp.append("\r\n").append(parent.text());
         }
@@ -55,7 +70,28 @@ public class BusCurrentInfoUtil {
         return resultMsg_.toString();
     }
 
-    public static void main(String[] args) throws IOException {
-        System.out.println(getBusCurrentInfo("710","2"));
+    public static void main(String[] args) throws IOException, URISyntaxException {
+//        System.out.println(getBusCurrentInfo("710","2"));
+//        System.out.println(allBusStand("710","1"));
+        System.out.println(new BigDecimal(34366.97).divide(new BigDecimal(121347.74),10,BigDecimal.ROUND_HALF_DOWN));
+    }
+
+    public static String allBusStand(String busNo,String lineType) throws URISyntaxException, IOException {
+        String result;
+        String url = "http://m.basbus.cn/SSGJ/GetBusLineDetail";
+        CloseableHttpClient httpCilent = HttpClients.createDefault();
+        HttpPost request = new HttpPost();
+        request.setURI(new URI(url));
+        List<NameValuePair> nvps = new ArrayList<>(4);
+        nvps.add(new BasicNameValuePair("line", busNo));
+        nvps.add(new BasicNameValuePair("type", lineType));
+        request.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
+        CloseableHttpResponse response = httpCilent.execute(request);
+        HttpEntity entity = response.getEntity();
+        result = EntityUtils.toString(entity, "utf-8");
+        System.out.println(result);
+        JSONObject jsonObject = JSON.parseObject(result);
+        System.out.println(jsonObject.get("beginstation"));
+        return result;
     }
 }

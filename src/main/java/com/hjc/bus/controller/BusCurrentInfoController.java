@@ -27,7 +27,7 @@ public class BusCurrentInfoController {
 
     @RequestMapping("/stand")
     public String index() {
-        return "current_stand_bus";
+        return "/bus/index";
     }
 
     @RequestMapping("/concrete")
