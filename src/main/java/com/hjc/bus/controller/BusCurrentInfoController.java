@@ -36,6 +36,7 @@ public class BusCurrentInfoController {
         String result;
         try {
             result = busCurrentInfoService.getBusCurrentInfo(busNo, lineType);
+            result += "=========" + busCurrentInfoService.allBusStand(busNo, lineType);
         } catch (Exception e) {
             logger.error("请求数据发生异常：{}", e.getMessage());
             return "请求失败！";

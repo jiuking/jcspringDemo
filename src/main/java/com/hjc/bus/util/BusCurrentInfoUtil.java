@@ -3,6 +3,7 @@ package com.hjc.bus.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -72,12 +73,10 @@ public class BusCurrentInfoUtil {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 //        System.out.println(getBusCurrentInfo("710","2"));
-//        System.out.println(allBusStand("710","1"));
-        System.out.println(new BigDecimal(34366.97).divide(new BigDecimal(121347.74),10,BigDecimal.ROUND_HALF_DOWN));
+        System.out.println(allBusStand("710","1"));
     }
 
     public static String allBusStand(String busNo,String lineType) throws URISyntaxException, IOException {
-        String result;
         String url = "http://m.basbus.cn/SSGJ/GetBusLineDetail";
         CloseableHttpClient httpCilent = HttpClients.createDefault();
         HttpPost request = new HttpPost();
@@ -87,11 +86,18 @@ public class BusCurrentInfoUtil {
         nvps.add(new BasicNameValuePair("type", lineType));
         request.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
         CloseableHttpResponse response = httpCilent.execute(request);
+        if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK){
+            return "查询无该公交！";
+        }
         HttpEntity entity = response.getEntity();
-        result = EntityUtils.toString(entity, "utf-8");
-        System.out.println(result);
+        String result = EntityUtils.toString(entity, "utf-8");
         JSONObject jsonObject = JSON.parseObject(result);
-        System.out.println(jsonObject.get("beginstation"));
-        return result;
+        StringBuilder stringBuilder = new StringBuilder();
+        List<JSONObject> list = (List<JSONObject>) jsonObject.get("list");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).get("station"));
+            stringBuilder.append(list.get(i).get("station")).append(i).append(" ");
+        }
+        return stringBuilder.toString();
     }
 }

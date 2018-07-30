@@ -13,27 +13,22 @@
     <title>Title</title>
 </head>
 <body>
-
-<form class="form-horizontal" action="/bus/current/info/concrete">
+<div class="text-center ">
+<form class="form-horizontal" id="busInfo" action="<%=basePath%>/bus/current/info/concrete" method="POST">
     <fieldset>
         <div id="legend" class="">
             <legend class="">表单名</legend>
         </div>
         <div class="control-group">
-
             <!-- Text input-->
-            <label id="busNo" class="control-label" for="busNo">公交路线：</label>
-            <div class="controls">
-                <input type="text" placeholder="placeholder" class="input-xlarge">
-                <p class="help-block">Supporting help text</p>
-            </div>
+            <label class="input-label" for="busNo">公交路线：</label>
+            <input id="busNo" name="busNo" type="text" placeholder="placeholder" class="input-xlarge">
         </div>
         <div class="control-group">
-
             <!-- Select Basic -->
-            <label class="control-label">方向：</label>
-            <div class="lineType">
-                <select class="input-xlarge">
+            <label class="select-label">方向：</label>
+            <div>
+                <select id="lineType" name="lineType" class="input-large">
                     <option value="1">正向</option>
                     <option value="2">反向</option>
                     <option value="3">循环</option>
@@ -45,8 +40,8 @@
             <label class="control-label">查询</label>
 
             <!-- Button -->
-            <div class="controls">
-                <button class="btn btn-success">查询</button>
+            <div class="submit">
+                <button type="submit" class="btn btn-success">查询</button>
             </div>
         </div>
 
@@ -54,6 +49,6 @@
     </fieldset>
 </form>
 
-
+</div>
 </body>
 </html>

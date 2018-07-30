@@ -1,11 +1,18 @@
 package com.hjc.bus.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.hjc.bus.service.BusCurrentInfoService;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +23,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Administrator
@@ -61,5 +73,30 @@ public class BusCurrentInfoServiceImpl implements BusCurrentInfoService {
         logger.info(startStand.text() + "--->" + endStand.text());
         resultMsg_.append(startStand.text()).append("---->").append(endStand.text()).append(resultMsg_temp);
         return resultMsg_.toString();
+    }
+
+    public String allBusStand(String busNo,String lineType) throws URISyntaxException, IOException {
+        String url = "http://m.basbus.cn/SSGJ/GetBusLineDetail";
+        CloseableHttpClient httpCilent = HttpClients.createDefault();
+        HttpPost request = new HttpPost();
+        request.setURI(new URI(url));
+        List<NameValuePair> nvps = new ArrayList<>(4);
+        nvps.add(new BasicNameValuePair("line", busNo));
+        nvps.add(new BasicNameValuePair("type", lineType));
+        request.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
+        CloseableHttpResponse response = httpCilent.execute(request);
+        if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK){
+            return "查询无该公交！";
+        }
+        HttpEntity entity = response.getEntity();
+        String result = EntityUtils.toString(entity, "utf-8");
+        JSONObject jsonObject = JSON.parseObject(result);
+        StringBuilder stringBuilder = new StringBuilder();
+        List<JSONObject> list = (List<JSONObject>) jsonObject.get("list");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).get("station"));
+            stringBuilder.append(list.get(i).get("station")).append(i).append(" ");
+        }
+        return stringBuilder.toString();
     }
 }
